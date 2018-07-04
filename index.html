@@ -9,8 +9,19 @@
 <body ng-app="stmath">
 
 	<div ng-controller="MainController">
-		
-			<div employee-list></div>
+
+			<table border="1">
+				<tr>
+					<td>
+						<div employee-list></div>
+					</td>
+					<td>
+						<p>Degugging data</p>
+						<pre> {{debugging | prettyJSON}} </pre>
+					</td>
+				</tr>
+			</table>
+			
 	</div>
 
 	<!-- Jquery and Angular components -->
