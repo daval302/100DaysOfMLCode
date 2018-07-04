@@ -14,8 +14,23 @@
 			"employee-list" : false
 		}
 
-		// pay attention on data server
+		// pay attention on data erver response
 		$rootScope.$on('server-response',function(event, data){
+			
+			// data receiverd to the MainControler has be handled case by case
+			switch(data.scope){
+
+				case "login-success":
+				// setting up the accesToken
+				$http.defaults.headers.Authorization = "Bearer " + data.token;
+				$http.defaults.expire = data.expires_at;
+				break;
+
+				case "login-error":
+				$scope.debugging = data;
+				break; 
+			}
+
 			$scope.debugging = data;
 		} );
 	})
@@ -26,13 +41,18 @@
 	})
 
 	.controller('LoginController', function($scope, $rootScope, $http){
+
+		// MODELS
 		$scope.form = {'email':null, password: null}
+		
+		// SUBMIT FUNCTION
 		$scope.submit = function(){
 			$http.post($http.defaults.heroku + 'login', $scope.form ).then(
 				function success(response){
-					$rootScope.$broadcast('server-response', response.data);
+					// login procedure produce a setting environmen acessToken, but they needs to be handled from  the MainController 
+					$rootScope.$broadcast('server-response', jQuery.extend({scope: 'login-success'}, response.data.success) );
 				}, function error(response){
-					$rootScope.$broadcast('server-response', response.data);
+					$rootScope.$broadcast('server-response', jQuery.extend({scope: 'login-error'}, response.data)  );
 				}
 			);
 			//$rootScope.$broadcast('server-response', $scope.form);
