@@ -1,0 +1,12 @@
+
+    <script type="text/ng-template" id="field_renderer.html">
+      {{field.label}}
+      <ul ng-if="field.Fields">
+          <li ng-repeat="field in field.Fields" 
+            ng-include="'field_renderer.html'">
+          </li>
+      </ul>
+    </script>
+    <ul>
+      <li ng-repeat="field in debugging" ng-include="'field_renderer.html'"></li>
+    </ul>
