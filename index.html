@@ -6,13 +6,18 @@
   	<meta description="A rota management for St Mathewes Care Home">
 	<title>stmath-cli</title>
 </head>
-<body>
+<body ng-app="stmath">
 
-	
+	<div ng-controller="MainController">
+		{{me}}
+	</div>
+
+
 
 	<!-- Jquery and Angular components -->
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="js/stmath.js"></script>
 
 </body>
 </html>
