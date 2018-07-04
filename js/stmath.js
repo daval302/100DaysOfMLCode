@@ -8,6 +8,12 @@
 		$http.defaults.headers.common.Accept = 'application/json';
 		$http.defaults.heroku = 'http://stmath-server.herokuapp.com/api/';
 
+		// active views
+		$scope.views = {
+			"login": true,
+			"employee-list" : false
+		}
+
 		// pay attention on data server
 		$rootScope.$on('server-response',function(event, data){
 			$scope.debugging = data;
@@ -20,8 +26,16 @@
 	})
 
 	.controller('LoginController', function($scope, $rootScope, $http){
+		$scope.form = {'email':null, password: null}
 		$scope.submit = function(){
-			$rootScope.$broadcast('server-response', {email: $scope.email, password: $scope.password});
+			$http.post($http.defaults.heroku + 'login', $scope.form ).then(
+				function success(response){
+					$rootScope.$broadcast('server-response', response.data);
+				}, function error(response){
+					$rootScope.$broadcast('server-response', response.data);
+				}
+			);
+			//$rootScope.$broadcast('server-response', $scope.form);
 		}
 	})
 
