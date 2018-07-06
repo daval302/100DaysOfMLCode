@@ -6,7 +6,7 @@
 	.controller('MainController', function($scope, $rootScope, $http){
 
 		$http.defaults.headers.common.Accept = 'application/json';
-		$http.defaults.heroku = 'http://stmath-server.herokuapp.com/api/';
+		$http.defaults.heroku = 'https://stmath-server.herokuapp.com/api/';
 
 		// active views
 		$scope.views = {
