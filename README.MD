@@ -1,4 +1,6 @@
-# Intro
+# 100 Days Of ML Code - Example Log
+
+## Intro
 
 This app is based on a real project for a Care Home based in England. The main feaature as starting is a web app able to give the manager stuff of the company to manage the Rota (employees shifts on week or month basis).
 
@@ -23,7 +25,7 @@ The above sihft is a *8 hours shift*.
 
 Completing and sugesting shift assignments, based on previous *rotas* and *employees requirements* so that it will predict next week rota, making the life of *Rota Administrator* useless `LOL`. 
 
-## Day 1 : 6th July 2018
+### Day 0: July 1, 2018
 
 * Importing necessary code for client side: `jQuery`, `AngularJs`
 * Draft Login view
@@ -31,10 +33,12 @@ Completing and sugesting shift assignments, based on previous *rotas* and *emplo
 * Login process sending credentials by `$http` 
 * Login vars settlement with a new *accessToken*
 
-## Next days tasks
+**Thoughts**
 
 * Figure out how to represent data to put in the **ML**
 * Choose the **ML** algorithm that suits best.
 * Choose the library/framework to use
-** I am thinking to implement **ML** in client side by `javascript`
+	* I am thinking to implement **ML** in client side by `javascript`
 
+**Link(s) to work**
+[StMath Rota Managment System](https://daval302.github.io/100DaysOfMLCode)
