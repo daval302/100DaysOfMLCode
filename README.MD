@@ -25,7 +25,7 @@ The above sihft is a *8 hours shift*.
 
 Completing and sugesting shift assignments, based on previous *rotas* and *employees requirements* so that it will predict next week rota, making the life of *Rota Administrator* useless `LOL`. 
 
-### Day 0: July 1, 2018
+### Day 0: July 6, 2018
 
 * Importing necessary code for client side: `jQuery`, `AngularJs`
 * Draft Login view
