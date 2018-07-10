@@ -33,6 +33,12 @@ Completing and sugesting shift assignments, based on previous *rotas* and *emplo
 * Login process sending credentials by `$http` 
 * Login vars settlement with a new *accessToken*
 
+### Day 5: 10 July, 2018
+
+Let's think about the data : employees shifts has to be distrubuited over the week and the first *employee requirement* is the ammount of hours that everyone is committed to do every week by contract.
+
+Data is generated as per day time, so for example 
+
 **Thoughts**
 
 * Figure out how to represent data to put in the **ML**
