@@ -1,4 +1,4 @@
-# 100 Days Of ML Code - Example Log
+# 100 Days Of ML Code
 
 ## Intro
 
@@ -37,7 +37,7 @@ Completing and sugesting shift assignments, based on previous *rotas* and *emplo
 
 Let's think about the data : employees shifts has to be distrubuited over the week and the first *employee requirement* is the ammount of hours that everyone is committed to do every week by contract.
 
-Done :
+**Done** :
 
 * imported two examples for Neural Network from [Siraj Raval repositories](https://github.com/llSourcell?tab=repositories)
 * started the `example.py` where test some neural network before applying it to a client side **ML** framework
