@@ -33,7 +33,7 @@ Completing and sugesting shift assignments, based on previous *rotas* and *emplo
 * Login process sending credentials by `$http` 
 * Login vars settlement with a new *accessToken*
 
-### Day 5: 10 July, 2018
+### Day 5: July 10, 2018
 
 Let's think about the data : employees shifts has to be distrubuited over the week and the first *employee requirement* is the ammount of hours that everyone is committed to do every week by contract.
 
@@ -42,6 +42,10 @@ Let's think about the data : employees shifts has to be distrubuited over the we
 * imported two examples for Neural Network from [Siraj Raval repositories](https://github.com/llSourcell?tab=repositories)
 * started the `example.py` where test some neural network before applying it to a client side **ML** framework
 * settled up the simpliest data set and output 
+
+### Day 6: July 11 2018
+
+* `example.py` setting up harcoding functions for testing data, no DB record
 
 **Thoughts**
 
