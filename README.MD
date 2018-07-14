@@ -47,7 +47,11 @@ Let's think about the data : employees shifts has to be distrubuited over the we
 
 * `example.py` setting up harcoding functions for testing data, no DB record
 
-**Thoughts**
+### Day 9: July 14 2018
+
+
+
+## **Thoughts**
 
 * Figure out how to represent data to put in the **ML**
 * Choose the **ML** algorithm that suits best.
