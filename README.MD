@@ -56,8 +56,8 @@ Let's think about the data : employees shifts has to be distrubuited over the we
 Tasks today:
 
 * [x] doing some practice with [MathJs extension for javascript](mathjs.org/) to implements the *Math* behind the ML algorithm
-* [ ] complete the RNN in example.py adapted for the the specific use case
-	* [ ] Simplified mode : `imput_dim = 2` and `output_dim=1`
+* [x] complete the RNN in example.py adapted for the the specific use case (adapted imput data)
+	* [x] Simplified mode : `imput_dim = 2` and `output_dim=1`
 
 
 ## **Thoughts**

@@ -6,6 +6,8 @@ class NeuralNetwork():
 		np.random.seed(1)
 		# data to be query from DB
 		self.employees = self.getEmployees()
+		# day of the week as second input
+		self.unpacked_days = self.unpackDays()
 		# input variables
 		self.alpha = 0.1
 		self.input_dim = 2
@@ -19,6 +21,16 @@ class NeuralNetwork():
 		syn_0_update = np.zeros_like(syn_0)
 		syn_1_update = np.zeros_like(syn_1)
 		syn_h_update = np.zeros_like(syn_h)
+
+	def unpackEmployees(self):
+		return np.unpackbits(np.array([ list(self.employees.keys() ) ],dtype=np.uint8).T,axis=1)
+
+	def unpackDays(self):
+		e = 2
+		days = list()
+		for n in range(7):
+			days.append(e ** n)
+		return np.unpackbits( np.array([ days ], dtype=np.uint8).T, axis=1 )		
 
 	def getEmployees(self):
 		# gonna use hardcoding for now, later real database
@@ -59,7 +71,12 @@ if __name__ == "__main__":
 	"""
 
 	n = NeuralNetwork()
-	print(n.employees)
+
+	# how selection from day of the week rapresented
+	print(n.unpacked_days)
+
+
+
 
 
 
