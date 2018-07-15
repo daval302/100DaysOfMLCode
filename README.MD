@@ -55,7 +55,7 @@ Let's think about the data : employees shifts has to be distrubuited over the we
 
 Tasks today:
 
-* [ ] doing some practice with [MathJs extension for javascript](mathjs.org/) to implements the *Math* behind the ML algorithm
+* [x] doing some practice with [MathJs extension for javascript](mathjs.org/) to implements the *Math* behind the ML algorithm
 * [ ] complete the RNN in example.py adapted for the the specific use case
 	* [ ] Simplified mode : `imput_dim = 2` and `output_dim=1`
 
@@ -64,7 +64,7 @@ Tasks today:
 
 * [x] Figure out how to represent data to put in the **ML**
 * [x] Choose the **ML** algorithm that suits best.
-* [ ]Choose the library/framework to use
+* [ ] Choose the library/framework to use
 	* I am thinking to implement **ML** in client side by `javascript`
 
 **Link(s) to work**
