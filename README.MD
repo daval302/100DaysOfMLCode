@@ -49,13 +49,22 @@ Let's think about the data : employees shifts has to be distrubuited over the we
 
 ### Day 9: July 14 2018
 
+* Chosen basic data format for for I/O rapresented in a `example.py`
+
+### Day 10: July 15 2018 
+
+Tasks today:
+
+* [ ] doing some practice with [MathJs extension for javascript](mathjs.org/) to implements the *Math* behind the ML algorithm
+* [ ] complete the RNN in example.py adapted for the the specific use case
+	* [ ] Simplified mode : `imput_dim = 2` and `output_dim=1`
 
 
 ## **Thoughts**
 
-* Figure out how to represent data to put in the **ML**
-* Choose the **ML** algorithm that suits best.
-* Choose the library/framework to use
+* [x] Figure out how to represent data to put in the **ML**
+* [x] Choose the **ML** algorithm that suits best.
+* [ ]Choose the library/framework to use
 	* I am thinking to implement **ML** in client side by `javascript`
 
 **Link(s) to work**
