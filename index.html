@@ -11,11 +11,12 @@
 
 	<div ng-controller="MainController">
 
-			<table border="1" width="100%">
+			<table border="1" width="100%" ng-init="selectView('login')">
 				<tr>
 					<td>
 						<div login ng-show="views.login"></div>
 						<div employee-list ng-show="views.employee-list"></div>
+						<div addshift ng-show="views.addshift"></div>
 					</td>
 					<td>
 						<p>Degugging data</p>

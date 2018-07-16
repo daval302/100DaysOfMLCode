@@ -10,8 +10,17 @@
 
 		// active views
 		$scope.views = {
-			"login": true,
-			"employee-list" : false
+			"login": false,
+			"employee-list" : false,
+			"addshift" : false
+		}
+
+		$scope.selectView = function(view){
+			for (var v  in $scope.views){
+				if (v == view)
+					$scope.views[v] = true;
+				else $scope.views[v] = false;
+			}
 		}
 
 		// pay attention on data erver response
@@ -56,6 +65,18 @@
 				}
 			);
 			//$rootScope.$broadcast('server-response', $scope.form);
+		}
+	})
+
+	.controller('AddShiftController',function($scope, $rootScope, $http){
+		// LOAD EMPLOYEES LIST
+		//$http.post($http.defaults.heroku + '');
+	})
+
+	.directive('addshift', function(){
+		return {
+			templateUrl: 'views/addshift.html',
+			controller: 'AddShiftController'
 		}
 	})
 
