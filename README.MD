@@ -59,6 +59,14 @@ Tasks today:
 * [x] complete the RNN in example.py adapted for the the specific use case (adapted imput data)
 	* [x] Simplified mode : `imput_dim = 2` and `output_dim=1`
 
+### Day 11: July 16 2018
+
+* [ ] Populate DB with employees list
+* [ ] Populate 5 weeks shifts from real data
+* [ ] Extract data for I/O simplified **ML** model in order to test the **RNN**
+* [ ] Admin View
+	* [ ] Employees List
+	* [ ] Shift table (only DB reading, no editable)
 
 ## **Thoughts**
 
