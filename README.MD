@@ -68,6 +68,10 @@ Tasks today:
 	* [ ] Employees List
 	* [ ] Shift table (only DB reading, no editable)
 
+### Day 12: July 17 2018
+
+* [x] Reviewing incompleted tasks of previous day and forward for next day
+
 ## **Thoughts**
 
 * [x] Figure out how to represent data to put in the **ML**

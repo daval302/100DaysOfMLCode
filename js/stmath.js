@@ -33,6 +33,9 @@
 				// setting up the accesToken
 				$http.defaults.headers.Authorization = "Bearer " + data.token;
 				$http.defaults.expire = data.expires_at;
+				// pass to the add shift view
+				$scope.selectView('addshift');
+				if(!$scope.$$phase) { $scope.$apply(); }
 				break;
 
 				case "login-error":
