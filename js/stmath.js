@@ -5,7 +5,7 @@
 
 	.controller('MainController', function($scope, $rootScope, $http){
 
-		$http.defaults.headers.common.Accept = 'application/json';
+		$http.defaults.headers.common['Accept'] = 'application/json';
 		$http.defaults.heroku = 'https://stmath-server.herokuapp.com/api/';
 
 		// active views
@@ -31,16 +31,22 @@
 
 				case "login-success":
 				// setting up the accesToken
-				$http.defaults.headers.Authorization = "Bearer " + data.token;
+				$http.defaults.headers.common['Authorization'] = "Bearer " + data.token;
 				$http.defaults.expire = data.expires_at;
 				// pass to the add shift view
 				$scope.selectView('addshift');
 				if(!$scope.$$phase) { $scope.$apply(); }
+				// send to the AddShiftController the gogo to request shifts
+				$rootScope.$broadcast('gettingShifts', true);
 				break;
 
 				case "login-error":
 				$scope.debugging = data;
 				break; 
+
+				default:
+				$scope.debugging = data;
+				break;
 			}
 
 			$scope.debugging = data;
@@ -72,7 +78,33 @@
 	})
 
 	.controller('AddShiftController',function($scope, $rootScope, $http){
+
+		// attila
+		$scope.load = function(){
+			$scope.getShift();
+		}
+
+		// define a function to load employee (the request is an example)
+		$scope.getShift = function(){
+			$http.get($http.defaults.heroku + 'v1/shift/bydate/D/2018/02/15').then(
+				function success(response){
+					// on success populate the table
+					// for now just debug the data
+					$rootScope.$broadcast('server-response', response.data );
+				}, function error(response){
+					$rootScope.$broadcast('server-response', response.data);
+				}
+			);
+		}
+
+		// gettingShifts ??
+		$rootScope.$on('gettingShifts',function(event, data){
+			if (data == true){
+				alert("ora dovresti avviare il loading degli shift");
+			}
+		});
 		// LOAD EMPLOYEES LIST
+
 		//$http.post($http.defaults.heroku + '');
 	})
 
