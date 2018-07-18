@@ -61,16 +61,25 @@ Tasks today:
 
 ### Day 11: July 16 2018
 
-* [ ] Populate DB with employees list
+* [x] Populate DB with employees list
 * [ ] Populate 5 weeks shifts from real data
 * [ ] Extract data for I/O simplified **ML** model in order to test the **RNN**
 * [ ] Admin View
 	* [ ] Employees List
-	* [ ] Shift table (only DB reading, no editable)
+	* [x] Shift table (only DB reading, no editable)
 
 ### Day 12: July 17 2018
 
 * [x] Reviewing incompleted tasks of previous day and forward for next day
+
+### Day 13: July 18 2018
+
+* Fixed common headers for post-login
+* Settled up parametres for addshift table 
+
+Target for tomorrow
+
+* [ ] set the *Javascript* version from `example.js`
 
 ## **Thoughts**
 
