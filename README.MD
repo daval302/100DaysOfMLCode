@@ -77,9 +77,9 @@ Tasks today:
 * Fixed common headers for post-login
 * Settled up parametres for addshift table 
 
-Target for tomorrow
+### Day 14: July 19 2018
 
-* [ ] set the *Javascript* version from `example.js`
+* [ ] set the *AngularJs* service *$NeruralNetwork* to implement the *NeuralNetwork* class in `python` 
 
 ## **Thoughts**
 
