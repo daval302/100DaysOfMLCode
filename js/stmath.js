@@ -98,6 +98,14 @@
 		//$http.post($http.defaults.heroku + '');
 	})
 
+
+	.directive('mainView', function(){
+		return {
+			templateUrl: 'views/main-view.html',
+			controller: 'MainController'
+		}
+	})
+
 	.directive('addshift', function(){
 		return {
 			templateUrl: 'views/addshift.html',
