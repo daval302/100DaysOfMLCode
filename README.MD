@@ -81,6 +81,10 @@ Tasks today:
 
 * [ ] set the *AngularJs* service *$NeruralNetwork* to implement the *NeuralNetwork* class in `python` 
 
+### Day 19: July 24 2018
+
+* Settled app.js and slitted Controllers and Services into separed files
+
 ## **Thoughts**
 
 * [x] Figure out how to represent data to put in the **ML**
