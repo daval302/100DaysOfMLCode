@@ -16,6 +16,7 @@ angular.module('stmath').controller('MainController', function($scope, $rootScop
 				$scope.views[v] = true;
 			else $scope.views[v] = false;
 		}
+		if(!$scope.$$phase) { $scope.$apply(); }
 	}
 
 	// pay attention on data erver response
@@ -30,7 +31,6 @@ angular.module('stmath').controller('MainController', function($scope, $rootScop
 			$http.defaults.expire = data.expires_at;
 			// pass to the add shift view
 			$scope.selectView('addshift');
-			if(!$scope.$$phase) { $scope.$apply(); }
 			// send to the AddShiftController the gogo to request shifts
 			$rootScope.$broadcast('gettingShifts', true);
 			break;
