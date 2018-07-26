@@ -11,6 +11,13 @@ angular.module('stmath')
 		}
 	});
 	// LOAD EMPLOYEES LIST
-
 	//$http.post($http.defaults.heroku + '');
+
+	// just an example to load the table
+	$scope.shifts = [];
+	$.getJSON('json/sample_shifts.json', function(data){
+		//$rootScope.$broadcast('server-response', {"scope":"debugging", "data": data} );
+		// populate the employees list on the table
+		$scope.shifts = data.slice(0,10);
+	});
 })
