@@ -45,6 +45,10 @@ angular.module('stmath').controller('MainController', function($scope, $rootScop
 			$scope.debugging = data;
 			break;
 
+			case "debugging":
+			$scope.debugging = data; $scope.$digest();
+			break;
+
 			default:
 			$scope.debugging = data;
 			break;
