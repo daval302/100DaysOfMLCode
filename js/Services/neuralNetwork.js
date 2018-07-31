@@ -3,8 +3,10 @@ angular.module('stmath')
 .factory('neuralNetwork', ['shiftGetter', function(shiftGetter){
 
 	// define the basics functions
-	var sigmoid = function(x){
-		return 1/(1+math.exp(-x));
+	var sigmoid = function(x, derivate = false){
+		if (derivate == false)
+			return 1/(1+math.exp(-x));
+		return x * (1 - x);
 	}
 
 	return {
