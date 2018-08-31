@@ -11,10 +11,60 @@
 		<th>SUN</th>
 	</tr>
 	<!-- EXAMPLE -->
-	<tr ng-repeat="employee in shifts">
+	<tr ng-repeat="employee in employees">
 		<td>{{employee.name}}</td>
 		<td>C/A</td>
-		<td ng-repeat="day in [0,1,2,3,4,5,6]">1-7</td>
+		<td ng-repeat="day in [1,2,3,4,5,6,0]">
+			<div shiftid="{{getId(employee.shifts, day)}}">{{formatShift(employee.shifts, day)}}</div>
+		</td>
 	</tr>
 	<!-- end EXAMPLE -->
 </table>
+
+<form>
+	<label for="fullname">Fullname</label>
+	<input type="text" name="fullname" placeholder="ex. Roberto di Stasi" ng-model="addNewEmployee">
+	<input type="button" name="newEmployeeButton" value="Add" >
+</form>
+
+<form>
+	<label for="shiftEdit">{{shiftEdit}}</label>
+	<input type="text" name="shiftEdit" placeholder="new slot" ng-model="slotInput">
+	<input type="button" name="edit" value="edit">
+	<input type="button" name="delete" value="delete">
+	<input type="button" name="undo" value="undo">
+	<input type="button" name="deb" value="deb">
+</form>
+
+<div ng-show="deb" >
+	<p>Debugging</p>
+	<ol>
+		<li ng-if="editList.length == 0">No data</li>
+		<li>Current slot : {{slotInput}}</li>
+		<li>
+			Shifts to be edited:
+			<ul>
+				<li ng-repeat="shift in editList">
+					id : {{shift.id}} <br>
+					slot : {{shift.slot}}  <br>
+				</li>
+			</ul>
+		</li>
+		<li>
+			Shifts to be deleted:
+			<ul>
+				<li ng-repeat="shift in deleteList">
+					id : {{shift.id}}
+				</li>
+			</ul>
+		</li>
+		<li>Current Employee: {{addNewEmployee}}</li>
+		<li>{{debdeb | json}}</li>
+	</ol>
+	
+
+	
+	
+
+
+</div>
