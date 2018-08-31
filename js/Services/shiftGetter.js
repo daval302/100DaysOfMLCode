@@ -15,7 +15,7 @@ angular.module('stmath')
 				var query = dd.getFullYear()+"/"+(dd.getMonth()+1)+"/"+dd.getDate();
 			}
 			// send query
-		$http.get($http.defaults.heroku + 'v1/shift/bydate/D/' + query).then(
+		$http.get($http.defaults.heroku + 'v1/shift/bydate/' + query).then(
 			function success(response){
 				// on success populate the table
 				// for now just debug the data
