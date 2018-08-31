@@ -8,13 +8,6 @@ angular.module('stmath')
 	}
 })
 
-.directive('addshift', function(){
-	return {
-		templateUrl: 'views/addshift.html',
-		controller: 'AddShiftController'
-	}
-})
-
 .directive('employeeList', function(){
 	return {
 		templateUrl: 'views/employee-list.html',
