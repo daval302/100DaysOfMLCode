@@ -45,6 +45,14 @@ angular.module('stmath').controller('MainController', function($scope, $rootScop
 			$scope.debugging = data;
 			break;
 
+			case "shiftGetter-byDateRange-success":
+			// ...
+			break;
+
+			case "shiftGetter-byDateRange-error":
+			// ..
+			break;
+
 			case "debugging":
 			$scope.debugging = data; $scope.$digest();
 			break;
