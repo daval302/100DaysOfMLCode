@@ -2,6 +2,9 @@ angular.module('stmath')
 
 .factory('shiftGetter', ['$http', '$rootScope', function($http, $rootScope) {
    
+	var employees;
+	var loaded = false;
+
 	return  {
 		byDate: function (date){
 			// handle date type
@@ -25,12 +28,12 @@ angular.module('stmath')
 				});
 			},
 
-		byDateRange: function(date1, date2){
+		byDateRange: function(date1 = null, date2 = null){
 
-			// !! DEBUGGING -- needs to be removed (1 week load for table)!!
+			// !! HARDCODED -- needs to be removed (1 week load for table)!!
 			date1 = '2018-08-01';
 			date2 = '2018-08-07';
-			// !! DEBUGGING !! -- end 
+			// !! HARDCODED !! -- end 
 
 			// check the date1 and date2 in case swap order
 			var d1 = moment(date1);
@@ -48,6 +51,8 @@ angular.module('stmath')
 			$http.get($http.defaults.heroku + 'v1/shift/bydaterange/' + query).then(
 				function success(response){
 					$rootScope.$broadcast('server-response', {scope:'shiftGetter-byDateRange-success', data: response.data} );
+					employees = response.data;
+					loaded = !loaded;
 				}, function error(response){
 					$rootScope.$broadcast('server-response', {scope:'shiftGetter-byDateRange-error', data: response.data } );
 				});
@@ -55,8 +60,14 @@ angular.module('stmath')
 			
 			//return $http.defaults.heroku + 'v1/shift/bydaterange/' + query;
 		
-		} // end byDateRange
+		}, // end byDateRange
 
+		dataLoaded: function(){return loaded;},
+		getEmployees: function(){
+			if (loaded)
+				return employees;
+			else return {error: true, msg: "No data loaded yer"}
+		}
 	}
 
 

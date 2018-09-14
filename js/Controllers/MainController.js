@@ -32,7 +32,7 @@ angular.module('stmath').controller('MainController', function($scope, $rootScop
 			// pass to the add shift view
 			$scope.selectView('addshift');
 			// send to the AddShiftController the gogo to request shifts
-			$rootScope.$broadcast('gettingShifts', true);
+			$rootScope.$broadcast('gettingShifts', {ready: true});
 			break;
 
 			case "login-error":
@@ -47,10 +47,12 @@ angular.module('stmath').controller('MainController', function($scope, $rootScop
 
 			case "shiftGetter-byDateRange-success":
 			// ...
+			// LOG(data.scope)
 			break;
 
 			case "shiftGetter-byDateRange-error":
 			// ..
+			// LOG(data.scope)
 			break;
 
 			case "debugging":

@@ -1,23 +1,26 @@
 angular.module('stmath')
 
-	.controller('AddShiftController', ['$http', '$scope', function($http, $scope){
+	.controller('AddShiftController', ['$http', '$scope', '$rootScope', '$interval', 'shiftGetter', 
+		function($http, $scope, $rootScope, $interval, shiftGetter){
 		
 		$scope.employees = [];
 		$scope.shiftEdit = "N/A";
 		$scope.addNewEmployee = "";
 		$scope.debdeb = [];
+		$scope.shiftLoaded = false;
 
 		$scope.editList = [];
 		$scope.deleteList = [];
 		$scope.deb = false;
 		$scope.slotInput = "";
 
+		$scope.formatShift = formatShift;
+		$scope.getId = getId;
+
+		/*/ !! DEPRECATED !!
 		$http.get('json/sample_shiftsv2.json')
 			.then(shiftsLoaded)
 			.catch(shiftsLoadFailed)
-
-		$scope.formatShift = formatShift;
-		$scope.getId = getId;
 
 		function shiftsLoaded(response) {
 			$scope.employees = response.data.slice(0,10)
@@ -25,6 +28,35 @@ angular.module('stmath')
 		function shiftsLoadFailed(err) {
 			console.error("Cannot load because", err.toString())
 		}
+
+		//!! DEPRECATED !! - end */
+
+		// WEB SERVICE
+
+		$rootScope.$on('gettingShifts', function(event, data){
+				$scope.shiftLoaded = data.ready;
+		});
+
+		// listener to be ready to make the request
+		$scope.shiftLoadedListener = $interval(function(){
+			if ($scope.shiftLoaded){
+				shiftGetter.byDateRange("date_start", "date_end");
+				$interval.cancel(  $scope.shiftLoadedListener );
+			}
+		},500);
+
+		// lister to be ready to write on the table
+		$scope.dataReadyForRedering = $interval(function(){
+			if (shiftGetter.dataLoaded()){
+				//alert("data ready do be showed");
+				// RENDER DATA
+				$scope.employees = shiftGetter.getEmployees();
+				if(!$scope.$$phase) { $scope.$apply(); }
+				$interval.cancel($scope.dataReadyForRedering);
+			}
+		}, 500);
+
+		// end WEB SERVICE
 
 		function getId(shifts, day) {
 			var shift = shifts.find(function (shift) {
