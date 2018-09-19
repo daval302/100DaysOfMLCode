@@ -8,6 +8,7 @@ angular.module('stmath')
 		$scope.addNewEmployee = "";
 		$scope.debdeb = [];
 		$scope.shiftLoaded = false;
+		$scope.table_rendered = false;
 
 		$scope.editList = [];
 		$scope.deleteList = [];
@@ -52,6 +53,8 @@ angular.module('stmath')
 				// RENDER DATA
 				$scope.employees = shiftGetter.getEmployees();
 				if(!$scope.$$phase) { $scope.$apply(); }
+				// ready for the directive applying dynamyc features to table
+				$scope.table_rendered = true;
 				$interval.cancel($scope.dataReadyForRedering);
 			}
 		}, 500);
@@ -195,8 +198,9 @@ angular.module('stmath')
 			templateUrl: 'views/addshift.html',
 			controller: 'AddShiftController',
 			link: function(scope, elem, attr){
+				// listen for table_rendered is true, then aply dynamic behavior
 				scope.renderingTable = $interval(function(){
-					if (scope.employees.length == elem.find('tr').length - 1){
+					if (scope.table_rendered == true){
 						selectingSlots(elem, slotSelector);
 						$interval.cancel( scope.renderingTable )
 					}
