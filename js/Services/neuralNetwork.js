@@ -17,13 +17,13 @@
 
 angular.module('stmath')
 
-.factory('neuralNetwork', ['$http', function($http){
+.factory('neuralNetwork', ['$http', 'formatData', function($http, formatData){
 
 	// some enviroment vars
 	var data;
 
 	// define the basics functions
-	var sigmoid = function(x, derivate = false){
+	function sigmoid(x, derivate = false){
 		if (derivate == false)
 			return 1/(1+math.exp(-x));
 		return x * (1 - x);
@@ -44,43 +44,11 @@ angular.module('stmath')
 	var synapse_1_update = math.zeros( math.size(synapse_1) );
 	var synapse_h_update = math.zeros( math.size(synapse_h) );
 
-	// get data form sample json
+	/* HARDCODING will be used shiftGetter service instead */
 	$http.get('json/sample_shiftsv2.json')
 		.then(shiftsLoaded)
 		.catch(shiftsLoadFailed)
 
-	function intToBinaryArray(number){
-		var binary = number.toString(2);
-		var array = [];
-		for (var i =  0; i < binary.length; i++) {
-			// the binary number into an array
-			array.push( parseInt(binary[i], 2) );
-		}
-		// adabt at 8 bit array
-		var diff = 8 - array.length;
-		for (i = 0; i < diff; i++){
-			array.unshift(0);
-		}
-
-		return array;
-	}
-
-	function shiftsToSlot(shifts){
-		var data = [];
-		for (var i = 0; i < shifts.length; i++) {
-			data.push(  shifts[i].slot );
-		}
-		return data;
-	}
-
-	function shiftsTo1WeekBit(shifts){
-		var rec  = [];
-		for (var i = 0; i < shifts.length; i++) {
-			// needs to be converted like [7-13] slit 7 and 13, count 0 to 7, 7 to 13, 13 to 23 and add 0 nad 1 
-			// ...
-		}
-		return rec;
-	}
 
 	/**
 		Adjust data to be used in NN
@@ -89,16 +57,17 @@ angular.module('stmath')
 	*/
 	function shiftsLoaded(response){
 
-		var elem = response.data[0];
+		var elem = /* DEBUGGING on 1 single employee */response.data[0]; 
 		// id and shifts 
 		var id = elem.id;
-		var shifts = shiftsToSlot( elem.shifts );
+		var shifts = formatData.shiftsToSlot( elem.shifts );
 		// creating the first matrix element for NN operation
-		var a = math.matrix( intToBinaryArray( id ) );
+		var a = math.matrix( formatData.intToBinaryArray( id ) );
 		// 1 week rapresentation 
-		var b = shiftsTo1WeekBit(shifts);
+		var b = formatData.shiftsTo1WeekBit(shifts);
 
 		// debugging
+		//data = { oring : shifts[0], decoded: decode1WeekBit(b) };
 		data = b;
 	}
 
@@ -111,7 +80,6 @@ angular.module('stmath')
 	// Training logic
 
 	return {
-		sigmoid,
 		getData
 	}
 
