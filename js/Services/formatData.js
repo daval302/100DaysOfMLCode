@@ -58,6 +58,43 @@ angular.module('stmath')
 		return rec;
 	}
 
+	var shiftTo24bit = function(single24){
+		var rec  = [];
+		if (single24 == 'OFF'){
+			for (var j = 0; j < 24; j++) rec.push(0);
+		}else{
+			var splitting = single24.split('-');
+			var patt  =  { 'start' :  parseInt(splitting[0]), 'end': parseInt(splitting[1])} ;
+			for (var j = 0; j < patt.start ; j++) rec.push(0);
+			for (var j = patt.start; j <= patt.end ; j++) rec.push(1);
+			for (var j = patt.end + 1; j < 24; j++) rec.push(0);
+		}
+		return rec; 
+	}
+
+	/* !! HARDCODING !! Data genereator ot be implemented in another service  */
+
+	var getRandomInt = function(max) {
+  		return Math.floor(Math.random() * Math.floor(max));
+	}
+
+	var toBitDayWeek = function(day_week){
+		var ret;
+		if (day_week == null) 
+			ret  = getRandomInt(6).toString(2).split('');
+		else 
+			ret = parseInt(day_week).toString(2).split('');
+
+		var len = 3 - ret.length;
+		for (var i = 0; i < len; i++)
+			ret.unshift('0');
+		for (var i = 0; i < ret.length; i++) 
+			ret[i] = parseInt( ret[i] );
+		return ret;
+	}
+
+	/* end -- !! HARDCODING !! Data genereator ot be implemented in another service  */
+
 	// NONE PURPOSE
 	var decode1Day = function (bits){
 		var singled = {};
@@ -92,7 +129,7 @@ angular.module('stmath')
 	}
 
 	return {
-		intToBinaryArray, shiftsToSlot, shiftsTo1WeekBit
+		shiftsToSlot, intToBinaryArray, toBitDayWeek, shiftTo24bit, decode1Day
 	}
 
 }])

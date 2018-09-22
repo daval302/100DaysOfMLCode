@@ -6,8 +6,10 @@
 		[0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0]
 		where the 1 rapresent 1 hour range in the 24 hours day and 0 off time in 24 hours range
 	
-	Input : [ID] from DB in bit values , [shift pattern X 7 ] (168 bit) rapresent the entire week 
-	Output : [shift pattern X 7 ] (168 bit)
+	Input : [ID] from DB in bit values , num[ 1-7] (3 bit) rapresent a week day
+	Output : [day pattern ] (24 bit)
+
+	BITTING : 8 + 3 = 24
 
 	Note: [ID] from DB by default is a 4 byte size, so to reduce computational cost, I will rapresent in 
 	Angular service as a 8 bit vlaue, so a range of unisgned integer between [0, 255] that will be enought for
@@ -57,18 +59,36 @@ angular.module('stmath')
 	*/
 	function shiftsLoaded(response){
 
+		/* !! HARDCODING !! 
+			make another service that emulate a sinle week employe picking up
+			that will go in elem as following 
+		*/
+
 		var elem = /* DEBUGGING on 1 single employee */response.data[0]; 
 		// id and shifts 
 		var id = elem.id;
 		var shifts = formatData.shiftsToSlot( elem.shifts );
+
+		/* !! HARDCODING  !!
+			Assume product ID X [1-7] endoded in bit :
+				00000001 X 001 => 000000011111111111110000 
+		*/
+
+		/* ! HARDCODING ! suppose to be interation throw 1 week shift*/ var single_shift = shifts[0];
+
 		// creating the first matrix element for NN operation
-		var a = math.matrix( formatData.intToBinaryArray( id ) );
-		// 1 week rapresentation 
-		var b = formatData.shiftsTo1WeekBit(shifts);
+		var a = math.matrix( formatData.intToBinaryArray( id ) ); // OK
+		// [1-7] week day rapresentation 
+		var b = formatData.toBitDayWeek(/*HARDCODING suppose to be interger from json*/);
+
+	    // NN output shift [24 bit]
+	    c = formatData.shiftTo24bit(single_shift);
+
+	    // ... initializa synapses and errors ...
 
 		// debugging
 		//data = { oring : shifts[0], decoded: decode1WeekBit(b) };
-		data = b;
+		data = {'original': single_shift, 'decoded': formatData.decode1Day(c)}; // OK
 	}
 
 	function shiftsLoadFailed (err){
