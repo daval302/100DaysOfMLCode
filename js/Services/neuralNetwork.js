@@ -24,32 +24,70 @@ angular.module('stmath')
 	// some enviroment vars
 	var data;
 
+		// Input variables
+		var alpha = 0.1
+		var input_dim = 11
+		var middle_dim = 24
+		var output_dim = 24
+
+		/* WEB SERVICE HARDCODING: synapses and weight has to be loaded from server  */
+		
+		var synapse_1 = math.multiply( 2, math.add( math.random([input_dim, middle_dim]), -1) ) ;
+		var synapse_2 = math.multiply( 2, math.add( math.random([middle_dim, output_dim]), -1) ) ;
+
+		var synapse_1_update = math.zeros( math.size(synapse_1) );
+		var synapse_2_update = math.zeros( math.size(synapse_2) );
+
+		/* -- end -- WEB SERVICE HARDCODING */
+
 	// define the basics functions
-	function sigmoid(x, derivate = false){
-		if (derivate == false)
-			return 1/(1+math.exp(-x));
-		return x * (1 - x);
+
+	var invbyelem = function(X){
+		return math.matrix(X).map(function (value, index, matrix) {
+  			return math.eval(1/value);
+		}) 
 	}
 
-	// Input variables
-	var alpha = 0.1
-	var input_dim = 2
-	var hidden_dim = 176
-	var output_dim = 1
+	var sigmoid = function(x, derivate = false){
+		if (derivate == false)
+			return math.matrix(/* math.divide(1, math.add( 1, math.exp( math.multiply(x, -1) ) ) ) */
+			invbyelem(math.add( 1, math.exp( math.multiply(x, -1) ) ) )   
+				);
+			//return 1/(1+math.exp(-x));
+		return  math.multiply( x, math.subtract(1, x) ) ;
+		//return x * (1 - x);
+	}
 
-	// Initialize neural network weights
-	var synapse_0 = math.multiply( 2, math.add( math.random([input_dim, hidden_dim]), -1) ) ;
-	var synapse_1 = math.multiply( 2, math.add( math.random([hidden_dim, output_dim]), -1) ) ;
-	var synapse_h = math.multiply( 2, math.add( math.random([hidden_dim, hidden_dim]), -1) ) ;
+	var train = function(id, week_day, single_shift){
+		
+		var a = id;
+		var b = week_day;
+	    var c =  single_shift;
 
-	var synapse_0_update = math.zeros( math.size(synapse_0) );
-	var synapse_1_update = math.zeros( math.size(synapse_1) );
-	var synapse_h_update = math.zeros( math.size(synapse_h) );
+	    // best gues [24 bit]
+	    var d =  math.zeros( [c.length] ) ;
 
-	/* HARDCODING will be used shiftGetter service instead */
-	$http.get('json/sample_shiftsv2.json')
-		.then(shiftsLoaded)
-		.catch(shiftsLoadFailed)
+	   	X = a.concat(b);
+	   	y = c;
+
+	   	/*  prototyping how should be
+
+	   	var layer_1 = {
+	   		'data' : sigmoid( math.multiply(X, synapse_1) ),
+	   		'error' : null,
+	   		'delta' : null
+	   	}
+
+	   	var layer_2 = {
+	   		'data' : sigmoid( math.multiply(layer_1.data, synapse_2 ) ),
+	   		'error' : math.subtract( y, layer_2.data ),
+	   		'delta' : sigmoid(layer_2.data, true)
+	   	}
+	   	*/
+
+	   	// DEBUGGING
+	   	return {'X': X, 'y': y}
+	}
 
 
 	/**
@@ -69,26 +107,12 @@ angular.module('stmath')
 		var id = elem.id;
 		var shifts = formatData.shiftsToSlot( elem.shifts );
 
-		/* !! HARDCODING  !!
-			Assume product ID X [1-7] endoded in bit :
-				00000001 X 001 => 000000011111111111110000 
-		*/
 
-		/* ! HARDCODING ! suppose to be interation throw 1 week shift*/ var single_shift = shifts[0];
-
-		// creating the first matrix element for NN operation
-		var a = math.matrix( formatData.intToBinaryArray( id ) ); // OK
-		// [1-7] week day rapresentation 
-		var b = formatData.toBitDayWeek(/*HARDCODING suppose to be interger from json*/);
-
-	    // NN output shift [24 bit]
-	    c = formatData.shiftTo24bit(single_shift);
-
-	    // ... initializa synapses and errors ...
-
-		// debugging
-		//data = { oring : shifts[0], decoded: decode1WeekBit(b) };
-		data = {'original': single_shift, 'decoded': formatData.decode1Day(c)}; // OK
+		data = /*DEBUGGGING*/  train(
+			formatData.intToBinaryArray( id ),
+			formatData.toBitDayWeek(/*HARDCODING suppose to be interger from json*/),
+			formatData.shiftTo24bit(single_shift = shifts[0]) /* ! HARDCODING ! suppose to be interation throw 1 week shift*/
+			)
 	}
 
 	function shiftsLoadFailed (err){
@@ -97,10 +121,18 @@ angular.module('stmath')
 
 	function getData(){return data;}
 
+	/* HARDCODING will be used shiftGetter service instead */
+
+	$http.get('json/sample_shiftsv2.json')
+		.then(shiftsLoaded)
+		.catch(shiftsLoadFailed)
+
+	/* -- end --HARDCODING */
+
 	// Training logic
 
 	return {
-		getData
+		getData, sigmoid, invbyelem
 	}
 
 }])
