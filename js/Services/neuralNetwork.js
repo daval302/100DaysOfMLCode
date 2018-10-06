@@ -58,35 +58,55 @@ angular.module('stmath')
 		//return x * (1 - x);
 	}
 
+	/*
+		@return status on synapses update 
+	*/
+
 	var train = function(id, week_day, single_shift){
 		
-		var a = id;
-		var b = week_day;
-	    var c =  single_shift;
+		if (id == week_day == single_shift == null)
+		{
+			var a = id;
+			var b = week_day;
+		    var c =  single_shift;
 
-	    // best gues [24 bit]
-	    var d =  math.zeros( [c.length] ) ;
+		    // best gues [24 bit]
+		    var d =  math.zeros( [c.length] ) ;
 
-	   	X = a.concat(b);
-	   	y = c;
+		   	X = a.concat(b);
+		   	y = c;
 
-	   	/*  prototyping how should be
+		   	/*  prototyping how should be
 
-	   	var layer_1 = {
-	   		'data' : sigmoid( math.multiply(X, synapse_1) ),
-	   		'error' : null,
-	   		'delta' : null
+		   	var layer_1 = {
+		   		'data' : sigmoid( math.multiply(X, synapse_1) ),
+		   		'error' : null,
+		   		'delta' : null
+		   	}
+
+		   	var layer_2 = {
+		   		'data' : sigmoid( math.multiply(layer_1.data, synapse_2 ) ),
+		   		'error' : math.subtract( y, layer_2.data ),
+		   		'delta' : sigmoid(layer_2.data, true)
+		   	}
+		   	*/
+		}
+
+
+	   	return {
+	   		'error' : 'false',
+	   		'mode' : 'debug',
+	   		'message' : 'Not trained'
 	   	}
 
-	   	var layer_2 = {
-	   		'data' : sigmoid( math.multiply(layer_1.data, synapse_2 ) ),
-	   		'error' : math.subtract( y, layer_2.data ),
-	   		'delta' : sigmoid(layer_2.data, true)
-	   	}
-	   	*/
+	}
 
-	   	// DEBUGGING
-	   	return {'X': X, 'y': y}
+	/*
+		@return  single shift pattrern like [1-7] in bit format
+	*/
+
+	var guess = function(id, week_day){
+		return [0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0]
 	}
 
 
@@ -132,7 +152,7 @@ angular.module('stmath')
 	// Training logic
 
 	return {
-		getData, sigmoid, invbyelem
+		train, guess
 	}
 
 }])
