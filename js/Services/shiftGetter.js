@@ -71,7 +71,7 @@ angular.module('stmath')
 	}
 
 
-}]);
+}])
 
 // CONSOLE DEBUGGING FOT SERVICE
 //  angular.element(document.body).injector().get('shiftGetter')
