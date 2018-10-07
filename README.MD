@@ -64,8 +64,8 @@ Tasks today:
 * [x] Populate DB with employees list
 * [ ] Populate 5 weeks shifts from real data
 * [ ] Extract data for I/O simplified **ML** model in order to test the **RNN**
-* [ ] Admin View
-	* [ ] Employees List
+* [x] Admin View
+	* [x] Employees List
 	* [x] Shift table (only DB reading, no editable)
 
 ### Day 12: July 17 2018
@@ -79,18 +79,22 @@ Tasks today:
 
 ### Day 14: July 19 2018
 
-* [ ] set the *AngularJs* service *$NeruralNetwork* to implement the *NeuralNetwork* class in `python` 
+* [x] set the *AngularJs* service *$NeruralNetwork* to implement the *NeuralNetwork* class in `python` 
 
 ### Day 19: July 24 2018
 
 * Settled app.js and slitted Controllers and Services into separed files
 
+### Status
+
+* Exporting into Angular 6
+
 ## **Thoughts**
 
 * [x] Figure out how to represent data to put in the **ML**
 * [x] Choose the **ML** algorithm that suits best.
-* [ ] Choose the library/framework to use
-	* I am thinking to implement **ML** in client side by `javascript`
+* [x] Choose the library/framework to use
+	* Implement **ML** in client side by in 'neuralNetwork' Angular Serice and integrated into master
 
 **Link(s) to work**
 [StMath Rota Managment System](https://daval302.github.io/100DaysOfMLCode)

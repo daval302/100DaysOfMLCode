@@ -67,6 +67,14 @@ angular.module('stmath')
 			if (loaded)
 				return employees;
 			else return {error: true, msg: "No data loaded yer"}
+		},
+
+		update: function(data){
+			/*	HARDCODING 
+			WEB SERVICE 
+			send changes and update to server
+			*/
+			console.log('Changes updated');
 		}
 	}
 

@@ -12,6 +12,7 @@ angular.module('stmath')
 
 		$scope.editList = [];
 		$scope.deleteList = [];
+		$scope.addEmployeesList = [];
 		$scope.deb = false;
 		$scope.slotInput = "";
 
@@ -139,14 +140,17 @@ angular.module('stmath')
 			if (newSlot != selectedSlot && newSlot.length >= 3){
 				var duplicates = false;
 
+				// CHECK IF DUPLICATES
 				for (var i = scope.editList.length - 1; i >= 0; i--) {
 					if (scope.editList[i]['id'] == selectedId){
 						duplicates=true; break;}/*end for*/}
+				// UPDATE DATA 
 				if (duplicates){
 					scope.editList[i]['slot'] = newSlot;
 				}else{
 					scope.editList.push({'id': selectedId, 'slot': newSlot});
 				}
+				// RENDER DATA
 				if (scope.deb == true)
 					scope.$apply();				
 			}
@@ -175,7 +179,7 @@ angular.module('stmath')
 		// add new emplyee 
 
 		function addNewEmployee(scope, mainElem){;
-			scope.employees.push({
+			scope.employees.push( newEmployee = {
 				'name' : scope.addNewEmployee,
 				'shifts' : (function(){
 					var ret = [];
@@ -187,9 +191,20 @@ angular.module('stmath')
 					return ret;
 				})()
 			});
+			scope.addEmployeesList.push(newEmployee);
 			scope.$apply();
 			unbindSlots(mainElem)
 			selectingSlots(mainElem, slotSelector);
+		}
+
+		function apply(scope, mainElem){
+			// SEND DATA FOR AN HTTP REQUEST
+			shiftGetter.update({
+				/* ERROR : shiftGetter not defined */
+				'edit' : $scope.editList,
+				'delete' : $scope.deleteList,
+				'add' : $scope.addEmployeesList
+			});
 		}
 
 		// end add new emplyee  
@@ -222,7 +237,10 @@ angular.module('stmath')
 				elem.find('input[name=deb]').click(function(){
 					scope.deb = !scope.deb;
 					scope.$apply();
-				})
+				});
+				elem.find('input[name=apply]').click(function(){
+					apply(scope, elem )
+				});				
 				// end BUTTONS edit, delete, undo listeners
 			}
 		}
